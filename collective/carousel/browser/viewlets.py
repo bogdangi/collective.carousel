@@ -4,6 +4,9 @@ from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone.app.layout.globals.interfaces import IViewView
 from plone.app.layout.viewlets.common import ViewletBase
 from zope.interface import alsoProvides
+from collective.carousel.interfaces import ICarouselSettings
+from zope.component import getUtility
+from plone.registry.interfaces import IRegistry
 
 try:
     from plone.app.collection.interfaces import ICollection
@@ -36,10 +39,13 @@ class CarouselViewlet(ViewletBase):
 
             # It doesn't make sense to show *all* objects from a collection
             # - some of them might return hundreeds of objects
+            registry = getUtility(IRegistry)
+            carousel_viewlet_max_size = registry.forInterface(
+                ICarouselSettings, False).carousel_viewlet_max_size or 7
             if ICollection.providedBy(provider):
-                res = provider.results(b_size=7)
+                res = provider.results(b_size=carousel_viewlet_max_size)
                 return res
-            return provider.queryCatalog()[:7]
+            return provider.queryCatalog()[:carousel_viewlet_max_size]
         return results
 
     def canSeeEditLink(self, provider):

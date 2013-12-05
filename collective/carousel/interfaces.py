@@ -1,6 +1,11 @@
 from Products.ATContentTypes.interface import IATContentType
 from Products.ATContentTypes.interface import IATNewsItem
 from zope.interface import Interface
+from zope import schema
+from zope.i18nmessageid import MessageFactory
+
+_ = MessageFactory('collective.carousel')
+
 try:
     from collective.contentleadimage.interfaces import ILeadImageable
 except:
@@ -25,3 +30,14 @@ if ILeadImageable is not None:
 
     class IATNewsItemWithLeadImage(ILeadImageable, IATNewsItem):
         """ More specific interface """
+
+
+class ICarouselSettings(Interface):
+    """Global Carousel settings. This describes records stored in the
+    configuration registry and obtainable via plone.registry.
+    """
+
+    carousel_viewlet_max_size = schema.Int(
+        title=_(u"Carousel viewlet max size"),
+        default=7,
+    )

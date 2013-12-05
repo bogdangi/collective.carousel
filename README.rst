@@ -127,6 +127,12 @@ Developed by **Jarn AS** |---| http://www.jarn.com
 Development sponsored by the **Bergen Public Library** |---|
 http://www.nettbiblioteket.no
 
+I need more items in carousel viewlet.
+--------------------------------------
+It is simple go to **Configuration registry** (`/portal_registry`) and set
+``collective.carousel.interfaces.ICarouselSettings.carousel_max_size`` how much
+items you need to show in viewlet.
+
 Dexterity
 =========
 

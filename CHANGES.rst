@@ -26,6 +26,9 @@ Changelog
 - Added description for dexterity support
   [bogdangi]
 
+- Added possibility to set max number items in viewlet via **plone.registry**.
+  [bogdangi]
+
 
 1.6.2 - August 28, 2013
 -----------------------
